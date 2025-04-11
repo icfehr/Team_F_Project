@@ -12,8 +12,8 @@ default currentpage = 0
 # Rules(Shown Cards, Sudden Death, Reverse, Dobelt_number)
 default standard_rules = [0, False, False, False]
 
-default playercolor_rgb = Color((51, 92, 147, 255))
-default enemycolor_rgb = Color((116, 0, 0, 255))
+default playercolor_rgb = Color((2, 106, 185, 255))
+default enemycolor_rgb = Color((219, 0, 0, 255))
 
 
 default table_cards = [[None for x in range(0,3)] for y in range(0,3)]
@@ -60,14 +60,75 @@ default card_monster = Card( imagepath="images/cards/087012_hr1.webp",
                             title="Monster",
                             description = "Its a Monster.")
 
+default card_goldie = Card( imagepath="images/cards/Goldie.jpg",
+                            topvalue = 5,
+                            bottomvalue = 2,
+                            rightvalue = 5,
+                            leftvalue = 4,
+                            title="Goldie",
+                            description = "Its a Goldfish.")
+                    
+default card_Goldie2 = Card( imagepath="images/cards/Goldie2.jpg",
+                            topvalue = 5,
+                            bottomvalue = 2,
+                            rightvalue = 5,
+                            leftvalue = 4,
+                            title="Goldie",
+                            description = "Its a Goldfish.")
+
+default card_milo = Card( imagepath="images/cards/Milo.jpg",
+                            topvalue = 5,
+                            bottomvalue = 2,
+                            rightvalue = 5,
+                            leftvalue = 1,
+                            title="Milo",
+                            description = "Its a Good boy.")
+
+default card_milo2 = Card( imagepath="images/cards/Milo2.jpg",
+                            topvalue = 5,
+                            bottomvalue = 2,
+                            rightvalue = 5,
+                            leftvalue = 1,
+                            title="Milo2",
+                            description = "Continues to be a Good Boy.")
+
+default card_stanley = Card( imagepath="images/cards/Stanley.jpg",
+                            topvalue = 5,
+                            bottomvalue = 2,
+                            rightvalue = 3,
+                            leftvalue = 5,
+                            title="Stanley",
+                            description = "Just the cutest little ball of Evil")
+
+default card_stanley2 = Card( imagepath="images/cards/Stanley2.jpg",
+                            topvalue = 5,
+                            bottomvalue = 2,
+                            rightvalue = 3,
+                            leftvalue = 5,
+                            title="Stanley2",
+                            description = "A murderous force of Evil for you heart to behold.")
 
 
-default enemy_deck = []
+### For testing and place holding purposes ### 
+default card_back = Card( imagepath="images/cards/start.jpeg",
+                            topvalue = 0,
+                            bottomvalue = 0,
+                            rightvalue = 0,
+                            leftvalue = 0,
+                            title="Back",
+                            description = "Back of the card.")
 
-default unlocked_cards = [card_monster, card_chicken, card_snail, card_fireball, card_bird]
+### Deck must hold 10 cards change cards to basic ai card sets later for each opponent, also later when webhook integration is done set this to sync with the server
 
-default playerdeck = [card_monster, card_chicken, card_snail, card_fireball, card_bird]
+default enemy_deck = [card_monster, card_chicken, card_snail, card_fireball, card_bird, card_goldie, card_Goldie2, card_milo, card_milo2, card_stanley]
 
+
+### Unlocked cards are the cards that are available to the player and will be used to create the deckbuilder portion if deckbuilder is fully added 
+default unlocked_cards = [card_monster, card_chicken, card_snail, card_fireball, card_bird, card_goldie, card_Goldie2, card_milo, card_milo2, card_stanley, card_stanley2]
+
+
+### PLAYER Deck must hold 10 cards
+default playerdeck = [card_monster, card_chicken, card_snail, card_fireball, card_bird, card_goldie, card_Goldie2, card_milo, card_milo2, card_stanley]
 
 ####### Rulesets for later
 
@@ -79,9 +140,9 @@ default playerdeck = [card_monster, card_chicken, card_snail, card_fireball, car
 
 default cards_basic = [card_monster, card_chicken, card_snail, card_fireball, card_bird]
 
+default cards_realm = [card_monster, card_chicken, card_snail, card_fireball, card_bird, card_goldie, card_Goldie2, card_milo, card_milo2, card_stanley, card_stanley2]
 
-
-default cards_all = list(cards_realm) + # list(instert card array here) 
+default cards_all = list(cards_realm) #+ list(insert card array here for more card types) 
 
 default opponent_first_deck = [card_monster.clone(), card_chicken.clone(), card_snail.clone(), card_fireball.clone(), card_bird.clone()]
 
@@ -271,7 +332,7 @@ init python:
             self.description = "Description"
             self.title = "Title"
             self.imagepath = "images/cards/card.webp"
-            self.backside = "images/cards/087000_hr1.webp"
+            self.backside = "images/cards/start.jpeg"
 
             self.topvalue = 0
             self.bottomvalue = 1

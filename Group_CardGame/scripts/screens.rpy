@@ -573,6 +573,34 @@ style about_label_text:
     size gui.label_text_size
 
 
+
+
+
+
+### Close Screen closes the game menu, and restores the game menu access if it was disabled.
+
+
+screen close_button(xoffset=0, yoffset=0, action=Return("Close"), key=["game_menu"]):
+    zorder 32
+
+    # Restore menu access if we're leaving nested context
+    if renpy.context_nesting_level() == 1:
+        $ action = [Function(enable_game_menu), action]
+
+
+######## ADD IN A PROPER CLOSE BUTTON ###########
+#   imagebutton:
+#       keyboard_focus False
+#       xanchor 1.0
+#       offset (xoffset, yoffset)
+#       idle gui.format("images/none.webp")
+#       hover image_hover(gui.format("images/none.webp"))
+#       action action
+#
+#   key key action action
+
+
+
 ## Load and Save screens #######################################################
 ##
 ## These screens are responsible for letting the player save the game and load

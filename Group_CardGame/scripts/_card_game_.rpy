@@ -1,6 +1,7 @@
 init python:
 
     def start_duel(opppent_deck, after_enemy = None, rules = None, duel_player_deck = None):
+        #### Rulesets are for later use tba later ####
         global standard_rules
         global playerdeck
         if rules == None:
@@ -77,7 +78,6 @@ init python:
 
         renpy.hide_screen("main_room_menu")
         renpy.show_screen("card_battle", player_deck, enemy_deck, shown_backside)
-        renpy.music.stop("weather") #Stop playing weather SFX
 
         _return = ui.interact()
 
@@ -210,20 +210,20 @@ init python:
             rules_list.append(card_rule_random)
         return rules_list
 
+
+    ### Easier to add basic change for cards here for rarity ###
     def advance_tier(tier):
-        global geniecard_level
+        global card_level
 
         renpy.show_screen("blktone")
         renpy.show_screen("advance_deck")
         renpy.transition(Dissolve(0.3))
         renpy.pause(1.0)
-
-        renpy.play("sounds/magic4.ogg")
         renpy.transition(Fade(0.2, 0.0, 0.8, color='#fff'))
-        geniecard_level = tier
-        # Change card image for each respective card.
+        card_level = tier
+        # Change card image for each respective card. In webp format for better compression add convert to webp to todo list
         for card in cards_dynamic:
-            card.imagepath = card.imagepath.split("_v")[0] + "_v{}.webp".format(geniecard_level)
+            card.imagepath = card.imagepath.split("_v")[0] + "_v{}.webp".format(card_level)
         renpy.show_screen("advance_deck")
 
         renpy.pause()
@@ -338,7 +338,7 @@ screen advance_deck():
     for i in range(len(cards_dynamic)):
         use cardrender(cards_dynamic[i],40+125*i,200, interact=False, cardzoom=0.375)
 
-    text "Tier [geniecard_level]" size 32 color "#fff" ypos 100 xalign 0.5 outlines [ (2, "#000", 0, 0) ]
+    text "Tier [card_level]" size 32 color "#fff" ypos 100 xalign 0.5 outlines [ (2, "#000", 0, 0) ]
 
     use ctc
 
@@ -346,7 +346,7 @@ screen advance_deck():
 screen card_end_message(message):
     zorder 15
 
-    text "{color=#FFF}{size=+40}[message]{/size}{/color}" xpos 540 ypos 300 xalign 0.5 yalign 0.5 outlines [ (5, "#000", 0, 0) ]
+    text "{color=#FFF}{size=+40}[message]{/size}{/color}" xalign 0.5 yalign 0.5 outlines [ (5, "#000", 0, 0) ]
 
 
 
@@ -382,5 +382,4 @@ screen card_end_message(message):
 
 label start_duel(opppent_deck, after_enemy = None, rules = None, duel_player_deck = None):
     $ duel_response = start_duel(opppent_deck, after_enemy, rules, duel_player_deck)
-    call weather_sound
     return

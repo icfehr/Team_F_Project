@@ -1,49 +1,74 @@
-default player_name = "Player 1"
-default player2_name = "Player 2"
-default player_id = 0
-
-default game_server = "0.0.0.0"  # Placeholder for game server IP address
-default opponent_id = 0
-
-# Placeholder for IP, will be set later if get_ip() is available
-default ip = "Unknown"
-
-init -98 python:
+init python:
     import random
-    # Make sure the classes are loaded (they are, from classes.rpy init -99)
-    # from store import playerdata, MultiplayerOpponent # Not strictly needed due to init order
+    import socket  # Make sure socket is imported if get_ip uses it
 
-    # --- Placeholder for get_ip ---
-    # If get_ip is your custom function, define or import it here.
-    # Otherwise, this will cause a NameError.
-    # Example using socket (standard library):
+    ### Common Functions 
+
+    def image_hover(image, brightness=0.12):
+        """Returns brighter image when hovering over an object"""
+        return Transform( image, matrixcolor=BrightnessMatrix(brightness) )
+
+    def image_alpha(image, alpha=0.5):
+        """Returns an image with changed alpha 0 - fully transparent 1 - fully visible"""
+        return Transform( image, matrixcolor=OpacityMatrix(alpha) )
+
+    def disable_game_menu():
+        setattr(renpy.store, "_game_menu_screen", None)
+
+    def enable_game_menu():
+        setattr(renpy.store, "_game_menu_screen", "save_screen")
+    ### Use to set time limits later 
+    def timeit(func, loops=10000, args=(), kwargs={}):
+        rv = timeit_module.timeit("func(*args, **kwargs)", number=loops, globals=dict(func=func, args=args, kwargs=kwargs))
+        print(f"The task has taken {rv} seconds to finish")
+
+
+    # Define global variables
+    player_name = "Player 1"
+    player2_name = "Player 2"
+    player_id = 0
+    startingimage = "images/start.jpg"
+    game_server = "0.0.0.0"  # Placeholder for game server IP address
+    opponent_id = 0
+    ip = "Unknown"
+
     def get_ip():
         try:
-            import socket
-            # Get local hostname
+            # Using socket to get local IP - adjust if you need public IP
             hostname = socket.gethostname()
-            # Get IP address corresponding to the hostname
+            # Try getting IP associated with hostname, might be 127.0.0.1
             ip_address = socket.gethostbyname(hostname)
-            # Filter out loopback addresses if necessary
+            # A more robust way to get a non-loopback local IP might be needed
+            # depending on your network setup. This is a basic example.
             if ip_address.startswith("127."):
-                pass
+                # Attempt to find a non-loopback address if possible
+                s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                try:
+                    # Doesn't have to be reachable
+                    s.connect(('10.255.255.255', 1))
+                    ip_address = s.getsockname()[0]
+                except Exception:
+                    # Fallback if connection fails
+                    ip_address = '127.0.0.1'
+                finally:
+                    s.close()
             return ip_address
         except Exception as e:
             print(f"Could not determine IP address: {e}")
-            return "127.0.0.1" # Fallback IP
-    # --- End Placeholder ---
+            return "127.0.0.1"  # Fallback IP
 
+    def initialize_player_data():
+        global player_name, player2_name, player_id, ip, game_server, opponent_id
+        player_id = random.randint(1, 10000000000)
+        ip = get_ip()
+        player = playerdata(player_name, player_id)
+        player2 = MultiplayerOpponent(player2_name, opponent_id, server=game_server)
+        print(f"Player data initialized: ID={player_id}, IP={ip}")
 
-    # Update store variables using the store prefix
-    store.player_id = random.randint(1, 10000000000)
+    # Initialize variables during the init phase
+    initialize_player_data()
 
-    # Access default variables using store. prefix when creating objects
-    # Ensure playerdata class is defined (it is in classes.rpy init -99)
-    store.player = playerdata(store.player_name, store.player_id)
-
-    # Call get_ip and store the result in the store variable 'ip'
-    store.ip = get_ip()
-
-    # Ensure MultiplayerOpponent class is defined (it is in classes.rpy init -99)
-    # Access default variables using store. prefix
-    store.player2 = MultiplayerOpponent(store.player2_name, store.opponent_id, server=store.game_server)
+image bg arena = "images/cards/arena.jpeg"
+image bg start = "images/cards/start.jpg"
+image placeholder = "images/087000_hr1.png"
+image bg start = "images/start.jpeg"

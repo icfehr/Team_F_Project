@@ -111,7 +111,7 @@ screen deck_builder_screen():
     #Page info
     $ str_currentpage = currentpage+1
     $ str_currentpage_max = int(math.ceil((len(unlocked_cards)-1)/card_shown)+1.0)
-    text "{color=#FFFFFF}{size=-5}Page [str_currentpage]/[str_currentpage_max]{/size}{/color}" xpos 215 ypos 360 text_align 0.5 xalign 0.5
+    text "{color=#FFFFFF}{size=-5}Page [str_currentpage]/[str_currentpage_max]{/size}{/color}" text_align 0.5 xalign 0.5
 
     #Gallery button
     imagebutton:
@@ -163,7 +163,7 @@ screen deck_builder_gallery():
     imagebutton:
         anchor (1.0, 0.0)
         ypos 18
-        xalign 0.98
+        xpos 0.98
 
         idle "images/cardgame/back.webp"
         hover "images/cardgame/back_hover.webp"
