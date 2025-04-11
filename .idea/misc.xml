@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
+<<<<<<< HEAD
     <option name="sdkName" value="Python 3.12 (RVS_Cardgame)" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (RVS_Cardgame)" project-jdk-type="Python SDK" />
+=======
+    <option name="sdkName" value="Python 3.12 (Team_F_Project)" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (Team_F_Project) (2)" project-jdk-type="Python SDK" />
+>>>>>>> a0451926932d0ce1f9ef17a0071c53b282acea6c
 </project>
