@@ -20,7 +20,7 @@ default table_cards = [[None for x in range(0,3)] for y in range(0,3)]
 
 #Special Cards
 
-default card_bird = Card( imagepath="images/cards/087001_hr1.webp",
+default card_bird = Card( imagepath="images/cards/087001_hr1.png",
                             topvalue = 4,
                             bottomvalue = 2,
                             rightvalue = 2,
@@ -28,7 +28,7 @@ default card_bird = Card( imagepath="images/cards/087001_hr1.webp",
                             title="Bird",
                             description = "Its a bird.")
 
-default card_fireball = Card( imagepath="images/cards/087006_hr1.webp",
+default card_fireball = Card( imagepath="images/cards/087006_hr1.png",
                             topvalue = 2,
                             bottomvalue = 1,
                             rightvalue = 3,
@@ -36,7 +36,7 @@ default card_fireball = Card( imagepath="images/cards/087006_hr1.webp",
                             title="Fireball",
                             description = "Its a Fireball.")
 
-default card_snail = Card( imagepath="images/cards/087008_hr1.webp",
+default card_snail = Card( imagepath="images/cards/087008_hr1.png",
                             topvalue = 7,
                             bottomvalue = 1,
                             rightvalue = 4,
@@ -44,7 +44,7 @@ default card_snail = Card( imagepath="images/cards/087008_hr1.webp",
                             title="Spike Snail",
                             description = "Its a snail with spikes.")
 
-default card_chicken = Card( imagepath="images/cards/087085_hr1.webp",
+default card_chicken = Card( imagepath="images/cards/087085_hr1.png",
                             topvalue = 1,
                             bottomvalue = 2,
                             rightvalue = 3,
@@ -52,7 +52,7 @@ default card_chicken = Card( imagepath="images/cards/087085_hr1.webp",
                             title="Giant Chicken",
                             description = "Its an oversized chicken.")
 
-default card_monster = Card( imagepath="images/cards/087012_hr1.webp",
+default card_monster = Card( imagepath="images/cards/087012_hr1.png",
                             topvalue = 2,
                             bottomvalue = 2,
                             rightvalue = 5,
@@ -349,8 +349,8 @@ init python:
 
         def get_border(self):
             if self.playercard:
-                return Transform("images/cards/border.webp", matrixcolor=TintMatrix(playercolor_rgb))
-            return Transform("images/cards/border.webp", matrixcolor=TintMatrix(enemycolor_rgb))
+                return Transform("images/cards/none.webp", matrixcolor=TintMatrix(playercolor_rgb))
+            return Transform("images/cards/none.webp", matrixcolor=TintMatrix(enemycolor_rgb))
 
         def get_title(self):
             return self.textcolor+self.title+"{/color}"

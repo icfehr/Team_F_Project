@@ -9,15 +9,14 @@
 
 label start:
 
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
-
     scene bg arena
+    "For the Purposes of this Demo the game loads directly into the given duel arena"
 
-    # This shows a character sprite. A placeholder is used, but you can
-    # replace it by adding a file named "eileen happy.png" to the images
-    # directory.
+    "Later on this will instead be a menu where you can select the game mode, single player, multiplayer, and deck building with unlocked cards."
+
+    "This is a demo of the game and not the final version."
+    "The game is currently in development and not all features are implemented yet."
+    "There are many game assets that are not final or missing, and will be updated in the future."
 
     ###DEGBUG###
     ### INSTERT TEST IMAGE SCREEN HERE ###
