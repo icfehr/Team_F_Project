@@ -30,24 +30,35 @@ This Project is split into 2 parts:
 
 ## Getting Started
 
-   A. Renpy Local Environment (Current -- See Planned Features for Final Release) 
-      1. Download the Renpy SDK
-           HTML: https://www.renpy.org/latest.html
-      2. Extract the SDK
-      3. Clone the repository within the default directory of where you extracted the SDK
-      4. Ensure Renpy sees the cloned project files and change the directory of where the project is located if placed in a different directory
-      5. Launch the game from SDK
+A. Renpy Local Environment (Current -- See Planned Features for Final Release) 
 
-   B. Flask Backend
-      1. Navigate to `flask_backend/`
-      2. Run:
-         ```bash
-         pip install -r ../requirements.txt
-         python app.py
+   1. Download the Renpy SDK
+
+        HTML: https://www.renpy.org/latest.html
+
+   2. Extract the SDK
+
+   3. Clone the repository within the default directory of where you extracted the SDK
+
+   4. Ensure Renpy sees the cloned project files and change the directory of where the project is located if placed in a different directory
+
+   5. Launch the game from SDK
+
+B. Flask Backend
+      Ensure Python is installed
+
+   1. Navigate to `flask_backend/`
+   2. In Terminal Run:
+      ```
+      pip install -r ../requirements.txt
+      ```
+      Then run the command below
+      ```
+      python app.py
       ```
       code blocks for commands
-      ```
-      
+      ``` 
+
       ### Installation
       
       1. **Clone the repository**:
