@@ -108,6 +108,235 @@ default card_stanley2 = Card( imagepath="images/cards/Stanley2.jpg",
                             title="Stanley2",
                             description = "A murderous force of Evil for you heart to behold.")
 
+default card_aflac = Card( imagepath="images/cards/Aflac.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 4,
+                            leftvalue = 2,
+                            title="Aflac",
+                            description = "Aflac is a duck.")
+
+default card_aflac2 = Card( imagepath="images/cards/Aflac2.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 4,
+                            leftvalue = 2,
+                            title="Aflac2",
+                            description = "Aflac is a duck.")
+
+default card_charlie = Card( imagepath="images/cards/Charlie.jpg",
+                            topvalue = 2,
+                            bottomvalue = 5,
+                            rightvalue = 7,
+                            leftvalue = 2,
+                            title="Charlie",
+                            description = "Charlie is a Horse.")
+
+default card_charlie2 = Card( imagepath="images/cards/Charlie2.jpg",
+                            topvalue = 2,
+                            bottomvalue = 5,
+                            rightvalue = 7,
+                            leftvalue = 2,
+                            title="Charlie2",
+                            description = "Charlie is a Horse.")
+
+default card_chirp = Card( imagepath="images/cards/Chirp.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 0,
+                            leftvalue = 4,
+                            description  = "Chirp is a cricket.",)
+
+default card_chirp2 = Card( imagepath="images/cards/Chirp2.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 0,
+                            leftvalue = 4,
+                            description  = "Chirp is a cricket.",)
+
+default card_clara = Card( imagepath="images/cards/Clara.jpg",
+                            topvalue = 2,
+                            bottomvalue = 5,
+                            rightvalue = 9,
+                            leftvalue = 5,
+                            title="Clara",
+                            description = "Clara is a mouse.")
+
+default card_clara2 = Card( imagepath="images/cards/Clara2.jpg",
+                            topvalue = 2,
+                            bottomvalue = 5,
+                            rightvalue = 9,
+                            leftvalue = 5,
+                            title="Clara2",
+                            description = "Clara is a mouse.")
+
+default card_cordell = Card( imagepath="images/cards/Cordell.jpg",
+                            topvalue = 5,
+                            bottomvalue = 2,
+                            rightvalue = 7,
+                            leftvalue = 9,
+                            title="Cordell",
+                            description = "Cordell is a sheep.")
+
+default card_cordell2 = Card( imagepath="images/cards/Cordell2.jpg",
+                            topvalue = 5,
+                            bottomvalue = 2,
+                            rightvalue = 7,
+                            leftvalue = 9,
+                            title="Cordell2",
+                            description = "Cordell is a sheep.")
+
+default card_dilly = Card( imagepath="images/cards/Dilly.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 7,
+                            leftvalue = 6,
+                            title="Dilly",
+                            description = "Dilly is a Duck.")
+
+default card_dilly2 = Card( imagepath="images/cards/Dilly2.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 7,
+                            leftvalue = 6,
+                            title="Dilly2",
+                            description = "Dilly is a Duck.")
+
+default card_goliath = Card( imagepath="images/cards/Goliath.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 7,
+                            leftvalue = 3,
+                            title="Goliath",
+                            description = "Goliath is a wolf.")
+default card_goliath2 = Card( imagepath="images/cards/Goliath2.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 7,
+                            leftvalue = 3,
+                            title="Goliath2",
+                            description = "Goliath is a wolf.")
+
+default card_gwltney = Card( imagepath="images/cards/Gwltney.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 5,
+                            leftvalue = 6,
+                            title="Gwltney",
+                            description = "Gwltney is a rhino.")
+default card_gwltney2 = Card( imagepath="images/cards/Gwltney2.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 5,
+                            leftvalue = 6,
+                            title="Gwltney2",
+                            description = "Gwltney is a rhino.")
+default card_hector = Card( imagepath="images/cards/Hector.jpg",
+                            topvalue = 2,
+                            bottomvalue = 5,
+                            rightvalue = 4,
+                            leftvalue = 4,
+                            title="Hector",
+                            description = "Hector is a girraffe.")
+default card_hector2 = Card( imagepath="images/cards/Hector2.jpg",
+                            topvalue = 2,
+                            bottomvalue = 5,
+                            rightvalue = 4,
+                            leftvalue = 4,
+                            title="Hector2",
+                            description = "Hector is a girraffe.")
+
+default card_jackson = Card( imagepath="images/cards/Jackson.jpg",
+                            topvalue = 2,
+                            bottomvalue = 5,
+                            rightvalue = 0,
+                            leftvalue = 2,
+                            title="Jackson",
+                            description = "Jackson is a swan.")
+default card_jackson2 = Card( imagepath="images/cards/Jackson2.jpg",
+                            topvalue = 2,
+                            bottomvalue = 5,
+                            rightvalue = 0,
+                            leftvalue = 2,
+                            title="Jackson2",
+                            description = "Jackson is a swan.")
+default card_michael = Card( imagepath="images/cards/Michael.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 0,
+                            leftvalue = 5,
+                            title="Michael",
+                            description = "Michael is a cardinal.")
+default card_michael2 = Card( imagepath="images/cards/Michael2.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 0,
+                            leftvalue = 5,
+                            title="Michael2",
+                            description = "Michael is a cardinal.")
+default card_Olivia = Card( imagepath="images/cards/Olivia.jpg",
+                            topvalue = 2,
+                            bottomvalue = 5,
+                            rightvalue = 8,
+                            leftvalue = 2,
+                            title="Olivia",
+                            description = "Olivia is a Ostrige.")
+default card_Olivia2 = Card( imagepath="images/cards/Olivia2.jpg",
+                            topvalue = 2,
+                            bottomvalue = 5,
+                            rightvalue = 8,
+                            leftvalue = 2,
+                            title="Olivia2",
+                            description = "Olivia is a Ostrige.")
+default card_Peacky = Card( imagepath="images/cards/Peacky.jpg",
+                            topvalue = 5,
+                            bottomvalue = 2,
+                            rightvalue = 7,
+                            leftvalue = 2,
+                            title="Peacky",
+                            description = "Peacky is a peacock.")
+default card_Peacky2 = Card( imagepath="images/cards/Peacky2.jpg",
+                            topvalue = 5,
+                            bottomvalue = 2,
+                            rightvalue = 7,
+                            leftvalue = 2,
+                            title="Peacky2",
+                            description = "Peacky is a peacock.")
+default card_robin = Card( imagepath="images/cards/Robin.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 2,
+                            leftvalue = 5,
+                            title="Robin",
+                            description = "Robin is a bird.")
+default card_robin2 = Card( imagepath="images/cards/Robin2.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 2,
+                            leftvalue = 5,
+                            title="Robin2",
+                            description = "Robin is a bird.")
+default card_rocky = Card( imagepath="images/cards/Rocky.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 2,
+                            leftvalue = 4,
+                            title="Rocky",
+                            description = "Rocky is a pitbull.")
+default card_rocky2 = Card( imagepath="images/cards/Rocky2.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 2,
+                            leftvalue = 4,
+                            title="Rocky2",
+                            description = "Rocky is a pitbull.")
+default card_squaky = Card( imagepath="images/cards/Squaky.jpg",
+                            topvalue = 3,
+                            bottomvalue = 7,
+                            rightvalue = 7,
+                            leftvalue = 5,
+                            title="Squaky",
+                            description = "Squaky is a raven.")
 
 ### For testing and place holding purposes ### 
 default card_back = Card( imagepath="images/cards/start.jpeg",
