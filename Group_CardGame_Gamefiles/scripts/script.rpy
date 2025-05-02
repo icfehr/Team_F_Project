@@ -1,34 +1,60 @@
-﻿# The script of the game goes in this file.
+﻿# script.rpy
 
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
+init python:
+    import socketio
+    import requests
 
+    # Connect to the server
+    sio = socketio.Client()
 
+    # Connect to the Flask server
+    sio.connect("http://127.0.0.1:5000")
 
-# The game starts here.
+    # Function to send a move
+    def send_move(player_name, move_details):
+        sio.emit("make_move", {"player": player_name, "move": move_details})
+
+    # Listen for move updates from the server
+    @sio.event
+    def move_made(data):
+        player = data['player']
+        move = data['move']
+        renpy.say(player, f"Moved: {move}")
 
 label start:
-
     scene bg arena
-    "For the Purposes of this Demo the game loads directly into the given duel arena"
+    "For the purposes of this demo, the game loads directly into the given duel arena."
 
-    "Later on this will instead be a menu where you can select the game mode, single player, multiplayer, and deck building with unlocked cards."
+    # Multiplayer connection block
+    $ ip = "127.0.0.1"
+    $ success = False
 
-    "This is a demo of the game and not the final version."
-    "The game is currently in development and not all features are implemented yet."
-    "There are many game assets that are not final or missing, and will be updated in the future."
+    python:
+        try:
+            response = requests.get(f'http://{ip}:5000/ping')
+            if response.status_code == 200:
+                success = True
+        except requests.exceptions.RequestException:
+            success = False
 
-    ###DEGBUG###
-    ### INSTERT TEST IMAGE SCREEN HERE ###
-    $ renpy.call_in_new_context("start_duel", enemy_deck)
-    ###DEGBUG###
+    if not success:
+        "Could not reach the server!"
+        return
 
-    # These display lines of dialogue.
+    $ player_name = "Angel"
+    $ response = requests.post(f'http://{ip}:5000/join', json={"player": player_name})
 
-    "You've created a new Ren'Py game."
+    if response.status_code == 200:
+        $ player_data = response.json()
+        "You are connected!"
+        # Show player's hand
+        "Your hand: [player_data['hand']]"
+    else:
+        "Failed to register."
 
-    "Once you add a story, pictures, and music, you can release it to the world!"
-
-    # This ends the game.
+    # Example of sending a move
+    $ move = "Played Card X"
+    python:
+        send_move("Angel", move)
 
     return
