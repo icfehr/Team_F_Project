@@ -1,0 +1,11 @@
+TODO
+
+Convert All Image files to webp for compression
+Debug Classes -- MOSTLY DONE 
+
+Finish Webhooks to server
+
+screens 591 add in a proper close button
+
+
+
