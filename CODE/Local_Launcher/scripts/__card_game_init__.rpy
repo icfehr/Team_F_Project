@@ -1,13 +1,14 @@
 default selectcard = -1
 default selectenemycard = -1
 default currentpage = 0
+
 #Shown Cards is a integer for how many cards should be hidden
-#
+
 #Sudden Death is where when there is draw then a new round will begin
 #Where you take all card of you color up in you hand
-#
+
 #Reverse is where the take over is reverse so instead of > it is <
-#
+
 #Dobelt_number
 # Rules(Shown Cards, Sudden Death, Reverse, Dobelt_number)
 default standard_rules = [0, False, False, False]
@@ -535,77 +536,87 @@ init python:
                 for card in dobelt_found:
                     table_cards[card[0]][card[1]].playercard = table_cards[x][y].playercard
 
+        # After all table_cards modifications, send the state to the server.
+        # You'll need to get the server IP and current player ID from your game's state.
+
+        # Placeholder for the actual call, see notes below on where to get IP/PlayerID
+    
+        pass 
+
+
+    def transmit_board_state_to_server(server_ip_with_port, current_player_id):
+        global table_cards # Access the global table_cards
+
+        serialized_board = []
+        for row in table_cards:
+            serialized_row = []
+            for card_object in row:
+                if card_object is None:
+                    serialized_row.append(None)
+                else:
+                    serialized_row.append(card_object.to_dict()) # Uses the new to_dict method
+            serialized_board.append(serialized_row)
+        
+        # This calls the function we added to webhook.rpy
+        return send_board_data(server_ip_with_port, current_player_id, serialized_board)
 
 ################################################################################################
 
         ### ADD FUNCTION TO SEND CURRENT TABLE TO SERVER HERE ####
-        ## Potentially Mirror code to ensure that the server has the correct values
-        #    def table_push(ip, player_id, player_name):
-        #    try:
-        #        data = {
-        #            "player_id": player_id,
-        #            "player_name": player_name
-        #        }
-        #        response = requests.post(f"http://{ip}/register", json=data)
-        #        return response.status_code == 200
-        #    except:
-        #        return False
-import json
-import requests  # Assuming you will use requests for POST requests (if not using Socket.IO for all communication)
 
-# Function to send game state to the server
-def table_push(ip, player_id, player_name, player_hand, current_turn, player_score):
-    try:
-        # Define the game state data to be sent to the server
-        game_state = {
-            "player_id": player_id,  # Player's ID
-            "player_name": player_name,  # Player's Name
-            "cards_in_hand": [card.to_dict() for card in player_hand],  # Cards in hand
-            "current_turn": current_turn,  # Whose turn it is
-            "score": player_score  # Current score
-        }
+    # Function to send game state to the server
+    def table_push(ip, player_id, player_name, player_hand, current_turn, player_score):
+        try:
+            # Define the game state data to be sent to the server
+            game_state = {
+                "player_id": player_id,  # Player's ID
+                "player_name": player_name,  # Player's Name
+                "cards_in_hand": [card.to_dict() for card in player_hand],  # Cards in hand
+                "current_turn": current_turn,  # Whose turn it is
+                "score": player_score  # Current score
+            }
 
-        # Send the game state to the server via POST request
-        response = requests.post(f"http://{ip}/register", json=game_state)
+            # Send the game state to the server via POST request
+            response = requests.post(f"http://{ip}/register", json=game_state)
 
-        # Check if the request was successful
-        if response.status_code == 200:
-            print("Game state successfully sent to the server.")
-            return True
-        else:
-            print(f"Failed to send game state: {response.status_code}")
+            # Check if the request was successful
+            if response.status_code == 200:
+                print("Game state successfully sent to the server.")
+                return True
+            else:
+                print(f"Failed to send game state: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"Error while sending game state: {e}")
             return False
-    except Exception as e:
-        print(f"Error while sending game state: {e}")
-        return False
 
-# Fallback function for local mode
-def initialize_local_game_data():
-    # Placeholder function for local mode (you can replace with your actual local setup)
-    print("Initializing local game data...")
-    return {"player_hand": [], "current_turn": None, "player_score": 0}
+    # Fallback function for local mode
+    def initialize_local_game_data():
+        # Placeholder function for local mode (you can replace with your actual local setup)
+        print("Initializing local game data...")
+        return {"player_hand": [], "current_turn": None, "player_score": 0}
 
-# Example of how to use this function in your game logic
-def card_game_init():
-    player_id = 1  # Example player ID
-    player_name = "Player1"  # Example player name
-    player_hand = []  # Example player hand (replace with actual data)
-    current_turn = 1  # Example current turn
-    player_score = 100  # Example score
+    # Example of how to use this function in your game logic
+    def card_game_init():
+        player_id = 1  # Example player ID
+        player_name = "Player1"  # Example player name
+        player_hand = []  # Example player hand (replace with actual data)
+        current_turn = 1  # Example current turn
+        player_score = 100  # Example score
 
-    # Server IP - use the correct IP address of your server
-    server_ip = "127.0.0.1"  # Assuming the server is running locally for now
+        # Server IP - use the correct IP address of your server
+        server_ip = "127.0.0.1"  # Assuming the server is running locally for now
 
-    # Call the table_push function to send the game state
-    success = table_push(server_ip, player_id, player_name, player_hand, current_turn, player_score)
+        # Call the table_push function to send the game state
+        success = table_push(server_ip, player_id, player_name, player_hand, current_turn, player_score)
 
-    if not success:
-        print("Failed to push data to the server. Running in local mode.")
-        local_game_data = initialize_local_game_data()  # Assuming you have this function
-        print("Running in local mode.")
+        if not success:
+            print("Failed to push data to the server. Running in local mode.")
+            local_game_data = initialize_local_game_data()  # Assuming you have this function
+            print("Running in local mode.")
 
-# Running the initialization
-card_game_init()
+    # Running the initialization
+    card_game_init()
 
 ################################################################################################
 
@@ -663,6 +674,18 @@ card_game_init()
 
         def get_description(self):
             return self.textcolor+self.description+"{/color}"
+
+        def to_dict(self):
+            # Converts the card object to a dictionary for JSON serialization.
+            return {
+                "title": self.title,
+                "imagepath": self.imagepath, # Server might use title to reconstruct, imagepath could be optional
+                "topvalue": self.topvalue,
+                "bottomvalue": self.bottomvalue,
+                "rightvalue": self.rightvalue,
+                "leftvalue": self.leftvalue,
+                "playercard": self.playercard,
+            }
 
         def clone(self):
             return Card(title = self.title,imagepath=self.imagepath, topvalue=self.topvalue, bottomvalue=self.bottomvalue, rightvalue=self.rightvalue, leftvalue=self.leftvalue, playercard = self.playercard)
