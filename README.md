@@ -36,12 +36,11 @@ This Project is split into 2 parts:
 
 FILES AND FILE STRUCTURE
 
-CODE - Where the game files are located
+CODE -- Where the game files are located
     /code/Flask_Server_backend/ -- Where the games server project files are held see server readme for more details on installation and running within a local enviroment
     /code/Local_Launcher/ -- Where the renpy executable files are held,  these are nicely organized within the game folder when compiled The project F folder holds a compiled version with an executable as gamefiles are formatted in machine code by default without being decompiled.
-    
-    as such /code/Local_Launcher/Project_F -- will hold a compiled version
-    and /code/Local_Launcher/Raw -- will hold a decompiled version that can be used to reference the internal code.
+    /code/Local_Launcher/Project_F -- will hold a compiled version
+    /code/Local_Launcher/Raw -- will hold a decompiled version that can be used to reference the internal code.
 
 
 DOC -- Documentation and Project files used to plan and create the project
