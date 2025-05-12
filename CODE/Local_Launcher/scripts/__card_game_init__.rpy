@@ -550,6 +550,62 @@ init python:
         #        return response.status_code == 200
         #    except:
         #        return False
+import json
+import requests  # Assuming you will use requests for POST requests (if not using Socket.IO for all communication)
+
+# Function to send game state to the server
+def table_push(ip, player_id, player_name, player_hand, current_turn, player_score):
+    try:
+        # Define the game state data to be sent to the server
+        game_state = {
+            "player_id": player_id,  # Player's ID
+            "player_name": player_name,  # Player's Name
+            "cards_in_hand": [card.to_dict() for card in player_hand],  # Cards in hand
+            "current_turn": current_turn,  # Whose turn it is
+            "score": player_score  # Current score
+        }
+
+        # Send the game state to the server via POST request
+        response = requests.post(f"http://{ip}/register", json=game_state)
+
+        # Check if the request was successful
+        if response.status_code == 200:
+            print("Game state successfully sent to the server.")
+            return True
+        else:
+            print(f"Failed to send game state: {response.status_code}")
+            return False
+    except Exception as e:
+        print(f"Error while sending game state: {e}")
+        return False
+
+# Fallback function for local mode
+def initialize_local_game_data():
+    # Placeholder function for local mode (you can replace with your actual local setup)
+    print("Initializing local game data...")
+    return {"player_hand": [], "current_turn": None, "player_score": 0}
+
+# Example of how to use this function in your game logic
+def card_game_init():
+    player_id = 1  # Example player ID
+    player_name = "Player1"  # Example player name
+    player_hand = []  # Example player hand (replace with actual data)
+    current_turn = 1  # Example current turn
+    player_score = 100  # Example score
+
+    # Server IP - use the correct IP address of your server
+    server_ip = "127.0.0.1"  # Assuming the server is running locally for now
+
+    # Call the table_push function to send the game state
+    success = table_push(server_ip, player_id, player_name, player_hand, current_turn, player_score)
+
+    if not success:
+        print("Failed to push data to the server. Running in local mode.")
+        local_game_data = initialize_local_game_data()  # Assuming you have this function
+        print("Running in local mode.")
+
+# Running the initialization
+card_game_init()
 
 ################################################################################################
 

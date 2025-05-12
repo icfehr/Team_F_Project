@@ -21,7 +21,7 @@ label start:
     ### INSTERT TEST IMAGE SCREEN HERE ###
     show bg arena
     with dissolve
-    #jump to basic_functionality label 
+    #jump to basic_functionality label
     jump basic_functionality
     show screen black
 
@@ -91,4 +91,15 @@ label basic_functionality:
     "Please try again later."
     return
 
+try:
+    sio.connect("http://127.0.0.1:5000")
+    print("Connected to the server.")
+except Exception as e:
+    print(f"Failed to connect to server: {e}")
+    # You can initialize a local mode here if the server is unavailable
+    server_connected = False
+    # Local game initialization or a fallback mode
+    # Set up a flag that the game should run locally
+    # You could initialize local game data here, for example:
+    local_game_data = initialize_local_game_data()
 

@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template_string
 from flask_socketio import SocketIO, emit
 import sqlite3
+import requests
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -25,12 +26,48 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Ping test
+# Function to send the current game state to another server
+def table_push(ip, player_id, player_name, player_hand, current_turn, player_score):
+    try:
+        game_state = {
+            "player_id": player_id,
+            "player_name": player_name,
+            "cards_in_hand": [card.to_dict() if hasattr(card, "to_dict") else card for card in player_hand],
+            "current_turn": current_turn,
+            "score": player_score
+        }
+
+        response = requests.post(f"http://{ip}/register", json=game_state)
+        if response.status_code == 200:
+            print("Game state successfully sent to the server.")
+            return True
+        else:
+            print(f"Failed to send game state: {response.status_code}")
+            return False
+    except Exception as e:
+        print(f"Error while sending game state: {e}")
+        return False
+
 @app.route('/ping', methods=['GET'])
 def ping():
     return jsonify({"status": "ok"}), 200
 
-# Join game
+@app.route('/register', methods=['POST'])
+def register_player():
+    data = request.get_json()
+    player_name = data.get('player_name')
+
+    if not player_name:
+        return jsonify({"error": "Missing 'player_name'"}), 400
+
+    players[player_name] = {
+        "hand": data.get('cards_in_hand', []),
+        "score": data.get('score', 0)
+    }
+
+    print(f"[REGISTER] {player_name} registered with hand: {players[player_name]['hand']}")
+    return jsonify({"message": f"Player {player_name} registered successfully"}), 200
+
 @app.route('/join', methods=['POST'])
 def join_game():
     global current_turn
@@ -42,11 +79,10 @@ def join_game():
     if player_name not in players:
         players[player_name] = {'score': 0, 'hand': []}
         if current_turn is None:
-            current_turn = player_name  # Set the first player to move
+            current_turn = player_name
 
     return jsonify({"message": f"Player {player_name} joined!"}), 200
 
-# Save to DB
 def save_move(player_name, move_details):
     conn = sqlite3.connect('game.db')
     cursor = conn.cursor()
@@ -54,7 +90,6 @@ def save_move(player_name, move_details):
     conn.commit()
     conn.close()
 
-# Move handler
 @app.route('/move', methods=['POST'])
 def make_move():
     global current_turn
@@ -72,18 +107,23 @@ def make_move():
     move_history.append((player_name, move_details))
     players[player_name]['score'] += 1
 
-    # Switch turn to next player
+    # Switch turns
     all_players = list(players.keys())
     if len(all_players) > 1:
         current_index = all_players.index(player_name)
         next_index = (current_index + 1) % len(all_players)
         current_turn = all_players[next_index]
 
-    socketio.emit('move_made', {'player': player_name, 'move': move_details})
+    # Update game state to server
+    server_ip = "127.0.0.1"
+    player_id = 1  # Dummy ID
+    player_hand = players[player_name]['hand']
+    player_score = players[player_name]['score']
+    table_push(server_ip, player_id, player_name, player_hand, current_turn, player_score)
 
+    socketio.emit('move_made', {'player': player_name, 'move': move_details})
     return jsonify({"status": "move saved", "next_turn": current_turn}), 200
 
-# Score test route
 @app.route('/play', methods=['POST'])
 def play_game():
     data = request.get_json()
@@ -98,7 +138,15 @@ def play_game():
         "player_score": players[player_name]['score']
     }), 200
 
-# JSON Admin data
+# ✅ NEW: Game State Route
+@app.route('/state', methods=['GET'])
+def get_game_state():
+    return jsonify({
+        "players": players,
+        "current_turn": current_turn,
+        "move_history": move_history
+    }), 200
+
 @app.route('/admin', methods=['GET'])
 def admin_panel_json():
     conn = sqlite3.connect('game.db')
@@ -118,7 +166,6 @@ def admin_panel_json():
         "moves": move_list
     }), 200
 
-# HTML Admin dashboard
 @app.route('/admin-panel', methods=['GET'])
 def admin_panel_html():
     conn = sqlite3.connect('game.db')
@@ -192,7 +239,6 @@ def admin_panel_html():
 
     return render_template_string(html_template, moves=move_list, current_turn=current_turn)
 
-# Socket handler
 @socketio.on('make_move')
 def handle_socket_move(data):
     player_name = data.get('player')
@@ -202,7 +248,7 @@ def handle_socket_move(data):
         save_move(player_name, move_details)
         emit('move_made', data, broadcast=True)
 
-# Start server
+# Run the app
 if __name__ == '__main__':
     init_db()
     socketio.run(app, debug=True)
