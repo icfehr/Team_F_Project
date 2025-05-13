@@ -62,6 +62,20 @@ Unused and Removed:
   
 TESTS -- Initially intended for testing features, proved to be redundant as Renpy's inbuilt compiler includes testing functionality in engine and will not compile if an error occurs while giving an accurate trackback
     ---Integration tests unable to be completed due to being assigned to no show members  
-
-
-
+  
+    
+  Iain - Front End development   
+	-- Made 95% of the Renpy code  
+	--Adapted code from Angel for sending information to server  
+	-- Added on a few missing routes to the server side noted each function changed with a ###Iain  
+	(seems like the went missing after he updated something?)  
+	--Updated project 3 classes and methods  
+	-- Created Demo 2 and Demo 2 presentation  
+  
+Juan - UI Assets   
+  
+Angel -- Backend development and server creation  
+	--Made 95% of the server code  
+	-- Added in code for server paths  
+  
+  
