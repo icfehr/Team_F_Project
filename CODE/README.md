@@ -1,7 +1,7 @@
 ### 2025S_CSCI441_VA_Software Engineering
 ### Team_F_Project
 ### Card Game
-
+# File put together by Team Lead Iain Fehr and Angel Escalera Aguir  
 
 # Ren'Py Card Game with Flask Backend  
   

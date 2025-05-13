@@ -1,7 +1,7 @@
 ### 2025S_CSCI441_VA_Software Engineering
 ### Team_F_Project
 ### Card Game
-
+# File put together by Team Lead Iain Fehr  
 Front end by Iain Fehr  
 
 1. A **Renpy-based executable file** that hosts the card game in a local sandbox and should be capable of connecting to a hosted server and sending and receiving data from the instance.  
@@ -11,7 +11,7 @@ Front end by Iain Fehr
    THE GAME FILES ARE SPLIT INTO A RAW DECOMPILED VERSION OF THE GAME FOR FILE ACCESS AND A COMPILED VERSION UNDER THE PROJECT F FOLDER THAT CONTAINS AND EXE  
   
     Decompiled:  
-    /RAW/Scripts -- Code 
+    /RAW/Scripts -- Code  
     /RAW/gui -- Renpy native GUI images   
     /RAW/images -- Images directory within Renpy contains project images and UI images  
     /RAW/saves -- Unused as game supports saving but is unneeded for use case  

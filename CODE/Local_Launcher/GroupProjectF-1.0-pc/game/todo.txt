@@ -1,0 +1,10 @@
+TODO
+
+Convert All Image files to webp for compression
+
+
+Finish Webhooks to server
+
+
+
+

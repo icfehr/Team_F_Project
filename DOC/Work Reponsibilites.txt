@@ -1,0 +1,8 @@
+Iain - Front End development
+	--Adapted code from Angel for sending information to server
+	-- Added on a few missing routes to the server side noted each function changed with a ###Iain
+
+Juan - UI Assets 
+
+Angel -- Backend development and server creation
+	-- Added in code for server paths

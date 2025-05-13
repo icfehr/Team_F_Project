@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Card Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>🎴 Card Game</h1>
+    <p id="score">Score: 0</p>
+    <div id="hand">Your hand will appear here.</div>
+    <button id="joinBtn">Join Game</button>
+    <button id="playBtn">Play Card</button>
+    <br>
+    <a href="/admin" style="color: #ccc;">View Admin Panel</a>
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
+</body>
+</html>
